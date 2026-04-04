@@ -1,0 +1,139 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #0b0d17;
+    color: whitesmoke;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: sans-serif;
+}
+
+header {
+    width:100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px; /* Separa el buscador de las fotos */
+}
+.logo{
+    width: 150px;
+    height: auto;
+    margin-top: 10px;
+}
+.logo-titulo-contenedor {
+   text-align: center;
+}
+
+#contenedor-buscador {
+    display: flex;
+    gap:10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 50px;
+}
+
+#buscador {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    width: 300px;
+    outline: none;
+}
+
+#boton-buscar {
+    padding: 10px 25px;
+    border-radius: 25px;
+    border: none;
+    background-color: #0056b3;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+#boton-buscar:hover {
+    background-color: #007bff;
+}
+
+#lista-fotos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    max-width: 1400px;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+
+.tarjeta {
+    background: white;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid #30363d;
+    width: 300px; /*le damos un ancho fijo para que todas las tarjetas sean iguales*/
+    min-height: 500px; /* Le damos una altura mínima base a la tarjeta */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Esto separa la foto del botón de forma elegante */
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3); /* Sombra suave para que resalte */
+
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 200px;
+    display: block;     /* Evita espacios extraños debajo de la imagen */
+    object-fit: cover; /* no se deforma*/
+    border-radius: 8px; /* Para que la foto también tenga esquinas suaves */
+}
+
+.info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    color: #1a1c23;
+}
+
+.info h3 {
+    margin-top: 0; /* Quita espacio innecesario arriba del título */
+    font-size: 1.2rem;
+    min-height: 3em; /* Reserva espacio para títulos de 2 líneas y que todo quede alineado */
+    margin: 15px 0;
+}
+
+.info ul {
+    list-style: none; /* Quita los puntos negros */
+    padding: 0;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.info li {
+    margin-bottom: 8px; /* Un poco de aire entre fecha, autor y tipo */
+    font-size: 0.9rem;
+}
+
+.boton-detalle {
+    margin-top: auto; /* Empuja el enlace hacia el fondo de la tarjeta */
+    display: inline-block;
+    color: #0056b3;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.boton-detalle:hover {
+    text-decoration: underline;
+}
+
