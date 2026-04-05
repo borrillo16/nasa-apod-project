@@ -1,5 +1,8 @@
 const API_KEY = "0VeCpkDeaBHszSFV9Zfn10R9kUohNHWITF3RBPnJ";
 const API_URL = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=30`;
+const btnRecargar = document.getElementById("boton-recargar");
+const inputBuscador = document.getElementById("buscador");
+const btnAleatorio = document.getElementById("btn-aleatorio");
 
 let fotosOriginales = [];
 
@@ -34,8 +37,9 @@ function pintarFotos(fotos) {
                         <li><strong>Fecha:</strong> ${item.date}</li>
                         <li><strong>Autor:</strong> ${item.copyright || "NASA / Dominio público"}</li>
                         <li><strong>Tipo:</strong> ${item.media_type.toUpperCase()}</li>
-                        <li><a href="${item.hdurl}" target="_blank">Descargar en HD"</a></li>
+                        
                     </ul>
+                    <a href="${item.hdurl}" target="_blank" class="boton-hd">Descargar Alta Resolución</a>
                     <a class="boton-detalle" href="detalle.html?date=${item.date}">Ver explicación completa</a>
                 </div>
 
@@ -51,5 +55,24 @@ buscador.addEventListener("input", (event) => {
     );
     pintarFotos(filtrados);
 })
+
+btnRecargar.addEventListener("click", () => {
+    inputBuscador.value = "";  // Borramos el texto que escribió el usuario
+    pintarFotos(fotosOriginales); // Volvemos a mostrar las 30 fotos
+});
+
+
+
+btnAleatorio.addEventListener("click", async () => {
+    // Cambiamos el endpoint para pedir 3 fotos al azar
+    const respuesta = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=6`);
+    const datosAleatorios = await respuesta.json();
+    
+    // Usamos tu función de siempre para pintarlas
+    pintarFotos(datosAleatorios);
+    
+    // Actualizamos nuestra "caja fuerte" para que el buscador también funcione con estas nuevas fotos
+    fotosOriginales = datosAleatorios;
+});
 
 obtenerFotos();

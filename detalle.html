@@ -4,27 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- cambiar titulo -->
-    <title>Detalle del Explorer</title>
+    <title>Detalle de la Imagen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="imge/x-icon" href="img/nasa.png">
 </head>
 <body>
     <header>
-        <a href="index.html">Volver al listado</a>
-        <h1 id="detalle-titulo">Cargando título...</h1>
+        <a href="index.html">← Volver al listado</a>
+        <h1 id="titulo-detalle">Cargando...</h1>
     </header>
 
-    <main>
-        <section info-astronomica>
-            <div id="contenedor-media"></div>
-
-            <div id="contenedor-extra"></div>
-
-            <article>
-                <h2>Descripción</h2>
-                <p id="descripcion-texto"></p>
-            </article>
-
-
-        </section>
+    <main id="contenedor-detalle">
+       <div id="foto-grande"></div>
+        <div id="texto-explicacion">
+            <p id="fecha-detalle"></p>
+            <p id="descripcion-detalle"></p>
+        </div>
     </main>
     <script src="js/detalle.js"></script>
 </body>
