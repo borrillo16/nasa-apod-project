@@ -1,0 +1,241 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #0b0d17;
+    color: whitesmoke;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.2rem;
+}
+
+header {
+    width: 100%;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.8rem;
+}
+
+.logo {
+    width: 9.3rem;
+    height: auto;
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.logo-titulo-contenedor {
+   text-align: center;
+}
+
+#contenedor-buscador {
+    display: flex;
+    gap: 0.6rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.9rem;
+    border-radius: 3.1rem;
+}
+
+#buscador {
+    padding: 0.6rem 1.2rem;
+    border-radius: 1.5rem;
+    border: none;
+    width: 18.7rem;
+    outline: none;
+}
+
+#boton-recargar {
+    padding: 0.6rem 1.5rem;
+    border-radius: 1.5rem;
+    border: none;
+    background-color: #0056b3;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+#boton-recargar:hover {
+    background-color: #007bff;
+}
+
+
+#lista-fotos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 87.5rem;
+    padding: 2.5rem 1.2rem;
+}
+
+
+#favoritos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 87.5rem;
+    padding: 2.5rem 1.2rem;
+}
+
+
+.tarjeta {
+    background: white;
+    border-radius: 0.7rem;
+    border: 0.06rem solid #30363d;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0.25rem 0.6rem rgba(0,0,0,0.3);
+    width: 100%;
+}
+
+
+.contenedor-img {
+    width: 100%;
+    height: 14rem;
+    padding: 0.8rem;
+    background: white;
+    border-radius: 0.7rem 0.7rem 0 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem; 
+}
+
+.contenedor-img img,
+.contenedor-img iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    display: block;
+    border: none;
+}
+
+
+.info {
+    padding: 0.9rem;
+    text-align: left;
+    color: #1a1c23;
+}
+
+.info h3 {
+    margin: 0.6rem 0;
+    font-size: 1.1rem;
+}
+
+.info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.info li {
+    margin-bottom: 0.6rem;
+}
+
+
+.estrella {
+    display: inline-block;
+    margin-bottom: 0.4rem;
+    font-size: 1.6rem;
+    color: gray;
+    cursor: pointer;
+}
+
+.estrella.activo {
+    color: gold;
+}
+
+
+.boton-detalle {
+    display: block;
+    text-align: center;
+    margin-top: 0.9rem;
+    color: #0056b3;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border: 0.06rem solid #0056b3;
+    padding: 0.3rem;
+    border-radius: 0.2rem;
+}
+
+.boton-detalle:hover {
+    text-decoration: underline;
+}
+
+.boton-hd {
+    display: inline-block;
+    background-color: #2c3e50;
+    color: white;
+    padding: 0.6rem 1.1rem;
+    border-radius: 0.3rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.boton-hd:hover {
+    background-color: #34495e;
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.2);
+}
+
+
+#contenedor-detalle {
+    max-width: 50rem;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #111827;
+    border-radius: 1.25rem;
+    box-shadow: 0 0.75rem 2rem rgba(0,0,0,0.6);
+    color: whitesmoke;
+}
+
+#foto-grande img,
+#foto-grande iframe {
+    width: 100%;
+    max-height: 25rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    display: block;
+    border: none;
+}
+
+#texto-explicacion {
+    margin-top: 1.5rem;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.tag-tipo {
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+}
+
+.fecha-detalle,
+.autor-detalle {
+    margin: 0.2rem 0;
+}
+
+
+a:not(.boton-hd) {
+    color: #4da3ff;
+    text-decoration: none;
+}
+
+a:not(.boton-hd):hover {
+    color: #82c3ff;
+}
