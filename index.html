@@ -1,38 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NASA Space Explorer | Descubre el Universo</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="imge/x-icon" href="img/nasa.png">
-
-
+    <link rel="icon" type="image/x-icon" href="img/nasa.png">
 </head>
 
 <body>
+
     <header>
         <div class="logo-titulo-contenedor">
             <h1>Explorador de la NASA</h1>
             <img src="img/nasa-logo-png_seeklogo-195796.png" alt="Logo de la Nasa" class="logo">
-      
         </div>
+
         <nav>
             <div id="contenedor-buscador">
                 <input type="text" id="buscador" placeholder="Buscar por título astronómico">
                 <button id="boton-recargar">Recargar </button>
                 <button id="btn-aleatorio" class="boton-hd">Ver fotos aleatorias</button>
+                <a href="favoritos.html" class="boton-hd">Ver favoritos</a>
             </div>
         </nav>
+
     </header>
 
     <main id="contenedor-principal">
+
         <section id="lista-fotos"></section>
-
-
+        
     </main>
-    <script src="js/script.js"></script>
-</body>
 
+    <script src="js/script.js"></script>
+
+</body>
 </html>

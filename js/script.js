@@ -11,68 +11,133 @@ async function obtenerFotos() {
         const respuesta = await fetch(API_URL);
         const datos = await respuesta.json();
         fotosOriginales = datos;
-        console.log("Datos recibidos de la NASA:", datos);
         pintarFotos(fotosOriginales);
+       
     } catch (error) {
         console.error("Error al conectar con la NASA:", error);
     }
-
 }
 
 function pintarFotos(fotos) {
     const contenedor = document.getElementById("lista-fotos");
     contenedor.innerHTML = "";
 
-      if (fotos.length === 0) {
-    contenedor.innerHTML = "<p class='error'>No se han encontrado resultados.</p>";
-  }
+    if (!fotos || fotos.length === 0) {
+        contenedor.innerHTML = "<p class='error'>No se han encontrado resultados.</p>";
+        return;
+    }
 
     fotos.forEach((item) => {
-        contenedor.innerHTML += `
-            <article class="tarjeta">
-                <img src="${item.url}" alt="${item.title}">
+        const tarjeta = document.createElement("article");
+        tarjeta.classList.add("tarjeta");
+
+        const mediaHtml =
+            item.media_type === "image"
+                ? `<img src="${item.hdurl || item.url}" alt="${item.title}">`
+                : `<iframe src="${item.url}" title="${item.title}" allowfullscreen></iframe>`;
+
+        const hdLink = item.media_type === "image" ? (item.hdurl || item.url) : item.url;
+
+        tarjeta.innerHTML = `
+           
+               <div class="contenedor-img">
+                    ${mediaHtml}
+                </div>
+
                 <div class="info">
                     <h3>${item.title}</h3>
+
+                     <span class="estrella" data-date="${item.date}">★ Favorito</span>
+
                     <ul>
                         <li><strong>Fecha:</strong> ${item.date}</li>
                         <li><strong>Autor:</strong> ${item.copyright || "NASA / Dominio público"}</li>
                         <li><strong>Tipo:</strong> ${item.media_type.toUpperCase()}</li>
-                        
                     </ul>
-                    <a href="${item.hdurl}" target="_blank" class="boton-hd">Descargar Alta Resolución</a>
+
+                    <a href="${hdLink}" target="_blank" class="boton-hd">Descargar Alta Resolución</a>
                     <a class="boton-detalle" href="detalle.html?date=${item.date}">Ver explicación completa</a>
-                </div>
+                </div>`;
+        contenedor.appendChild(tarjeta);
+    });
+    
+    const estrellas = document.querySelectorAll(".estrella");
 
-            </article> `
+    estrellas.forEach(estrella => {
+        const fecha = estrella.dataset.date;
 
+        if (esFavorito(fecha)) {
+            estrella.classList.add("activo");
+        }
+    });
+
+    estrellas.forEach(estrella => {
+        estrella.addEventListener("click", () => {
+            const fecha = estrella.dataset.date;
+
+            alternarFavorito(fecha);
+
+            if (esFavorito(fecha)) {
+                estrella.classList.add("activo");
+            } else {
+                estrella.classList.remove("activo");
+            }
+           
+        });
     });
 }
 
-buscador.addEventListener("input", (event) => {
+function leerFavoritos() {
+    const guardados = localStorage.getItem("favoritos");
+    if (!guardados) {
+        return [];
+    }
+    return JSON.parse(guardados);
+}
+
+function guardarFavoritos(lista) {
+    localStorage.setItem("favoritos", JSON.stringify(lista));
+}
+
+
+function esFavorito(fecha){
+    const lista = leerFavoritos();
+    return lista.includes(fecha);
+}
+
+function alternarFavorito(fecha) {
+    let lista = leerFavoritos();
+    if (lista.includes(fecha)){
+        lista = lista.filter(fechaGuardada => fechaGuardada !== fecha);
+    }else{
+        lista.push(fecha);
+    }
+    guardarFavoritos(lista);
+}
+
+inputBuscador.addEventListener("input", (event) => {
     const texto = event.target.value.toLowerCase().trim();
-    const filtrados = fotosOriginales.filter((fotos) => 
-        fotos.title.toLowerCase().includes(texto)
+    const filtrados = fotosOriginales.filter((foto) => 
+        foto.title.toLowerCase().includes(texto)
     );
     pintarFotos(filtrados);
-})
-
-btnRecargar.addEventListener("click", () => {
-    inputBuscador.value = "";  // Borramos el texto que escribió el usuario
-    pintarFotos(fotosOriginales); // Volvemos a mostrar las 30 fotos
 });
 
-
+btnRecargar.addEventListener("click", () => {
+    inputBuscador.value = ""; 
+    pintarFotos(fotosOriginales); 
+});
 
 btnAleatorio.addEventListener("click", async () => {
-    // Cambiamos el endpoint para pedir 3 fotos al azar
-    const respuesta = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=6`);
-    const datosAleatorios = await respuesta.json();
-    
-    // Usamos tu función de siempre para pintarlas
-    pintarFotos(datosAleatorios);
-    
-    // Actualizamos nuestra "caja fuerte" para que el buscador también funcione con estas nuevas fotos
-    fotosOriginales = datosAleatorios;
+    try {
+        const respuesta = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=6`);
+        const datosAleatorios = await respuesta.json();
+        pintarFotos(datosAleatorios);
+       
+    } catch (error) {
+        console.error("Error al cargar fotos aleatorias:", error);
+    }
 });
 
 obtenerFotos();
+
